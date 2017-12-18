@@ -1,4 +1,10 @@
+<div class="center jumbotron">
+	<h1> Welcome to sample app</h1>
+	<h2>
+		This is the home page for the <a href="http://localhost:3000/">Ruby on Rails</a> Sample App
+	</h2>
+	<%= link_to "Sign up now!", signup_path, class: "btn btn-lg btn-primary"%>
+</div>
 
-
-<h1>Sample App | Home Page</h1>
-<p> Click <a href="http://localhost:3000/static_pages/help">here</a> to go Help Page</p>
+<%= link_to image_tag("rails.png", alt: "Rails logo"),
+            'http://rubyonrails.org/' %>
