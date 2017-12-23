@@ -22,5 +22,5 @@
 
 .byebug_history
 
-# Ignore application configuration
+#Ignore application configuration
 /config/application.yml

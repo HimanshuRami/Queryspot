@@ -39,6 +39,7 @@ config.action_mailer.smtp_settings = {
   user_name: ENV["GMAIL_USERNAME"],
   password: ENV["GMAIL_PASSWORD"]
 }
+config.action_mailer.default_url_options = { :host => 'https://sampleappbyhemsh.herokuapp.com/' }
   # `config.assets.precompile` and `config.assets.version` have moved to config/initializers/assets.rb
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
