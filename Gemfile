@@ -9,9 +9,11 @@ gem 'hirb', '~> 0.7.3'
 gem 'coffee-rails', '4.2.2'
 gem 'faker',        '1.7.3'
 gem 'jquery-rails', '4.3.1'
+gem "letter_opener"
 gem 'turbolinks',   '5.0.1'
 gem 'will_paginate','3.1.6'
 gem 'jbuilder',     '2.7.0'
+gem "figaro"
 gem 'bcrypt',       '3.1.11'
 gem 'bootstrap-will_paginate', '1.0.0'
 
