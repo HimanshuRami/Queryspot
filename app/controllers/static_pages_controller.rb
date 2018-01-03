@@ -13,4 +13,21 @@ class StaticPagesController < ApplicationController
 
   def Books
   end
+
+  def dev
+  end
+
+  def bus
+  end
+
+
+  def it
+  end
+
+
+  def fit
+  end
+
+  def ls
+  end
 end
