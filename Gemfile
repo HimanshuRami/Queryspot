@@ -10,11 +10,14 @@ gem 'coffee-rails', '4.2.2'
 gem 'faker',        '1.7.3'
 gem 'jquery-rails', '4.3.1'
 gem "letter_opener"
+gem 'carrierwave',  '1.2.2'
+gem 'mini_magick',  '4.7.0'
 gem 'turbolinks',   '5.0.1'
 gem 'will_paginate','3.1.6'
 gem 'jbuilder',     '2.7.0'
 gem "figaro"
 gem 'bcrypt',       '3.1.11'
+gem 'pry'
 gem 'bootstrap-will_paginate', '1.0.0'
 
 group :development, :test do
@@ -38,6 +41,8 @@ end
 
 group :production do
   gem 'pg', '0.18.4'
+  gem 'fog', '1.42'
+
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
