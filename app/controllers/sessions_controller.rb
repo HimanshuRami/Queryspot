@@ -18,7 +18,7 @@ class SessionsController < ApplicationController
   	else
  			flash.now[:danger] = "Invalid Email/Password" 
   		render 'new'
-  end
+    end
   end
 
   def destroy

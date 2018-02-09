@@ -1,0 +1,6 @@
+<% if @post_items.any? %>
+  <ol class="question_ces">
+    <%= render @post_items %>
+  </ol>
+  <%= will_paginate @post_items %>
+<% end %>

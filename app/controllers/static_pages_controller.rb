@@ -12,6 +12,28 @@ class StaticPagesController < ApplicationController
   def about
   end
 
+  def compdept
+    if logged_in?
+      @question_ce = current_user.question_ces.build
+      @post_items= current_user.post.paginate(page:params[:page])
+    end
+  end
+  
+  def itdept
+  end
+
+  def ecdept
+  end
+
+  def proddept
+  end
+
+  def civildept
+  end
+  
+  def mechdept
+  end
+  
   def contact
   end
 

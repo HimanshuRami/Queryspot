@@ -10,6 +10,17 @@
             <% if logged_in? %>
             <li><%= link_to "Users", users_path %></li>
             <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Ask Department<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><%= link_to "Computer Engineering", compdept_path%></li>
+                <li><%= link_to "IT Engineering", itdept_path%></li>
+                <li><%= link_to "EC Engineering", ecdept_path%></li>
+                <li><%= link_to "Production Engineering", proddept_path%></li>
+                <li><%= link_to "Civil Engineering", civildept_path%></li>
+                <li><%= link_to "Mechanical Engineering", mechdept_path%></li>
+              </ul>
+            </li>
+            <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle= "dropdown">Account<b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li><%= link_to "Profile", current_user%></li>

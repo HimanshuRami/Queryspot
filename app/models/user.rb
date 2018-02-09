@@ -13,10 +13,18 @@ class User < ApplicationRecord
   
   has_secure_password
   
+  def self.find_by_first_letter(letter)
+    find(:all, :conditions => ['title LIKE ?', "#{letter}%"], :order => 'title ASC')
+  end
+
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   
   has_many :microposts, dependent: :destroy
- 
+  has_many :comments  , dependent: :destroy 
+  
+  has_many :question_ces, dependent: :destroy
+  has_many :answers, dependent: :destroy 
+                               
 
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
@@ -27,6 +35,10 @@ class User < ApplicationRecord
   
   has_many :following, through: :active_relationships, source: :followed 
   has_many :followers, through: :passive_relationships, source: :follower                  
+
+  has_many :user_subscribed_topics, inverse_of: :user
+  has_many :topics, through: :user_subscribed_topics
+
    # Returns the hash digest of the given string.
   def User.digest(string)
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST :
@@ -42,12 +54,21 @@ class User < ApplicationRecord
                      OR user_id = :user_id", user_id: id)
   end
 
+  def post
+    following_ids = "SELECT followed_id FROM relationships
+                     WHERE  follower_id = :user_id"
+    QuestionCe.where("user_id IN (#{following_ids})
+                     OR user_id = :user_id", user_id: id)
+  end
+
+  
+
   def User.new_token
   	SecureRandom.urlsafe_base64
   end
 
    # Remembers a user in the database for use in persistent sessions.
-  def remember
+ def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end
@@ -107,6 +128,12 @@ class User < ApplicationRecord
     following.include?(other_user)
   end
 
+  def self.search (search_keyword)
+      where('name LIKE ?', "%#{search_keyword}%")
+  end
+   
+
+  
   private
   
   # Converts email to all lower-case.

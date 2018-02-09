@@ -19,6 +19,8 @@ gem "figaro"
 gem 'bcrypt',       '3.1.11'
 gem 'pry'
 gem 'bootstrap-will_paginate', '1.0.0'
+gem 'acts_as_votable', '~> 0.11.1'
+#gem 'rails_emoji_picker'
 
 group :development, :test do
   gem 'sqlite3', '1.3.13'

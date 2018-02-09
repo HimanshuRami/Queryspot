@@ -1,0 +1,19 @@
+<%= form_for(@question_ce) do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  
+  <div class="form-group">
+  <%= f.label :subject%>
+  <%= f.collection_select :subject_id, Subject.all, :id, :name, {:include_blank => "Please select Subject"}, {class: "form-control"} %>
+  </div>
+  
+  <div class="form-group">
+    <%= f.text_area :content, placeholder: "Ummm.... My Today's Query is...." ,  class: 'form-control' , :rows => "5"%>
+  </div>
+  
+  <%= f.submit "lemme ask", class: "btn btn-primary" %>
+ 
+  <span class="picture">
+    <%= f.file_field :picture, accept:'image/jpeg,image/gif,image/png'%>
+  </span>
+
+<% end %>

@@ -3,14 +3,18 @@ class UsersController < ApplicationController
   	  before_action :logged_in_user,only: [:index ,:edit, :update, :destroy,:following, :followers]
   	  before_action :correct_user,  only: [:edit, :update]
 		  before_action :admin_user,    only: [:destroy]
+    
     def index
       @users = User.paginate(page: params[:page])
     end
-      
+    
+    
+     
     
 		def show
 			@user =User.find(params[:id])
       @microposts = @user.microposts.paginate(page: params[:page])
+      @question_ces = @user.question_ces.paginate(page: params[:page])  
 			# debugger
 		end
   	
@@ -23,6 +27,7 @@ class UsersController < ApplicationController
     end
   	
   	def create
+      #binding.pry
   		@user=User.new(user_params) 
   		if @user.save
        UserMailer.account_activation(@user).deliver_now
@@ -68,10 +73,20 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  def subscribe_user
+    # binding.pry
+    @topics = Topic.all
+  end
+  def create_subscribe_user
+    binding.pry
+  end
+
+
+
   	private 
 
   	def user_params
-  		params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  		params.require(:user).permit(:name, :email, :password, :password_confirmation, topic_ids: [])
   	end
 
     # Confirms a logged-in user.
@@ -81,6 +96,9 @@ class UsersController < ApplicationController
         redirect_to login_url
       end
     end
+
+    
+
 
     # Confirm a correct user.
     def correct_user

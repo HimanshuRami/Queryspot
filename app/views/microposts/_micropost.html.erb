@@ -1,15 +1,69 @@
 <li id="micropost-<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
-  <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
-  <span class="content">
-    <%= micropost.content %>
-    <%= image_tag micropost.picture.url if micropost.picture? %>
+  
+  <span class="user">
+    <%= link_to micropost.user.name, micropost.user %>
   </span>
+  
+  <span class="content">
+    <strong>
+    <%= micropost.content %>
+    </strong></br>
+    
+   <%= image_tag micropost.picture.url if micropost.picture? %>
+   <i>-Posted <%= time_ago_in_words(micropost.created_at) %> ago.</i>
+    <%= link_to like_micropost_path(micropost),class: "btn btn-success btn-sm" ,method: :put do %>
+   yayy!!! |
+  <%= micropost.get_upvotes.size %>
+  <% end %> | 
+    <%= link_to dislike_micropost_path(micropost),class: "btn btn-info btn-sm", method: :put do %>
+  Nope.. |
+  <%= micropost.get_downvotes.size %>
+
+<% end %>
+    
+    <h4 style="text-align: center;"> Comments: </h4>
+    <p> <%= micropost.comments.count %> Comments till now</p>
+    <% micropost.comments.each do |comment| %>
+   <%#=  %> 
+   <strong ><%= comment.user.name %> :</strong>
+    <%= comment.body%> |
+    <i>Posted <%= time_ago_in_words(comment.created_at) %> ago.</i> <br>
+
+    <%= link_to like_comment_path(comment),class: "btn btn-success btn-sm" ,method: :put do %>
+   yayy!!! |
+  <%= comment.get_upvotes.size %>
+  <% end %> | 
+    <%= link_to dislike_comment_path(comment),class: "btn btn-info btn-sm", method: :put do %>
+  Nope.. |
+  <%= comment.get_downvotes.size %>
+
+<% end %>
+
+    <% if current_user?(comment.user) ||  current_user.admin? %>
+       | <%= link_to "Delete Comment", comment ,method: :delete,
+                                       data: { confirm: "You sure?" },class: "btn btn-danger btn-sm" %>
+    <% end %> </br>
+    <%  end %>
+  </span>
+  
   <span class="timestamp">
-    Posted <%= time_ago_in_words(micropost.created_at) %> ago.
-     <% if current_user?(micropost.user) %>
-      <%= link_to "delete", micropost, method: :delete,
-                                       data: { confirm: "You sure?" } %>
+    
+  <%= form_for Comment.new  do |f| %>
+      <%= f.label :comment, 'Add Comment' %>:
+      <%= f.text_field :body, class: 'form-control', :required => true %><br />
+      <%= f.hidden_field :user_id, :value => current_user.id %>
+      <%= f.hidden_field :micropost_id, :value =>  micropost.id %>
+      <%= f.submit "Publish Comment"  ,:size => 50 , class: "btn btn-primary"%>
+  <% end %>
+
+   
+    <p></p>
+    <p></p>
+   
+     <% if current_user?(micropost.user) ||  current_user.admin? %>
+      <%= link_to "Delete Microtale ", micropost, method: :delete,
+                                       data: { confirm: "You sure?" },class: "btn btn-danger btn-sm" %>
     <% end %>
   </span>
 </li>
