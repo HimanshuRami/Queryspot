@@ -27,13 +27,12 @@ class AnswersController < ApplicationController
 	def downvote
   	  @answer = Answer.find(params[:id])
   	  @answer.downvote_by current_user
-  	  redirect_back fallback_location: root_pathk
+  	  redirect_back fallback_location: root_path
 	end
 
 	private 
 	
 	def answer_params
-	  params.require(:answer).permit(:body, :question_ce_id, :user_id)
+	  params.require(:answer).permit(:body, :question_ce_id, :user_id, :picture)
 	end
-
 end

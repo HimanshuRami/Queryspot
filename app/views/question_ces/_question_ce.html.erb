@@ -1,47 +1,74 @@
 <li id="question_ce-<%= question_ce.id %>"
   <%= link_to gravatar_for(question_ce.user, size: 50), question_ce.user %>
 </span>
-  <span class="user">
-	 <%= link_to question_ce.user.name, question_ce.user %> Added in <%=question_ce.subject.try(:name) %>
-  </span>
+  
+    <span class="user">
+  	 <%= link_to question_ce.user.name, question_ce.user %> Added in <%=question_ce.subject.try(:name) %>
+    </span>
 
     <span class="content">
       <strong><%= question_ce.content %></strong><br>
  	  </span>
 
- 	  <%= image_tag question_ce.picture.url if question_ce.picture? %>
+ 	  <%= image_tag question_ce.picture.url if question_ce.picture? %><br><br>
+
     <i>
    	 -Posted <%= time_ago_in_words(question_ce.created_at) %> ago.
     </i>
 
     <%= link_to like_question_ce_path(question_ce),class: "btn btn-success btn-sm" ,method: :put do %>
-   yayy!!! |
-  <%= question_ce.get_upvotes.size %>
-  <% end %> | 
-    <%= link_to dislike_question_ce_path(question_ce),class: "btn btn-info btn-sm", method: :put do %>
-  Nope.. |
-  <%= question_ce.get_downvotes.size %>
+   
+     yayy!!! |
+  
+     <%= question_ce.get_upvotes.size %>
+  
+    <% end %> | 
+    
+     <%= link_to dislike_question_ce_path(question_ce),class: "btn btn-info btn-sm", method: :put do %>
+  
+     Nope.. |
+  
+     <%= question_ce.get_downvotes.size %>
 
-<% end %>
+    <% end %>
 
 
 
-    <h4 style="text-align: center;"> Answers: </h4>
-    <p style="padding-left: 60px"><%= question_ce.answers.count %> Answers till now</p>
-    <p style="padding-left: 60px"><% question_ce.answers.each do |answer| %>
-     <strong ><%= answer.user.name %> :</strong>
-     <%= answer.body%> |
-     <i>Posted <%= time_ago_in_words(answer.created_at) %> ago.</i> <br>
-     <%= link_to like_answer_path(answer),class: "btn btn-success btn-sm" ,method: :put do %>
-   yayy!!! |
-  <%= answer.get_upvotes.size %>
-  <% end %> | 
+    <h4 style="text-align: center;"> 
+      Answers: 
+    </h4>
+    
+    <p style="padding-left: 60px">
+      <%= question_ce.answers.count %> Answers till now
+    </p>
+    
+    <p style="padding-left: 60px">
+      
+      <% question_ce.answers.each do |answer| %>
+      
+      <strong >
+        <%= answer.user.name %> :
+      </strong>
+      
+      <%= answer.body%>
+      <%= image_tag answer.picture.url if answer.picture? %> |
+     <i>
+      Posted <%= time_ago_in_words(answer.created_at) %> ago.
+     </i> <br>
+     
+    <%= link_to like_answer_path(answer),class: "btn btn-success btn-sm" ,method: :put do %>
+    
+    yayy!!! |
+    <%= answer.get_upvotes.size %>
+    <% end %> | 
+    
     <%= link_to dislike_answer_path(answer),class: "btn btn-info btn-sm", method: :put do %>
-  Nope.. |
-  <%= answer.get_downvotes.size %>
-
-<% end %>
-     <% if current_user?(answer.user) ||  current_user.admin? %>
+  
+    Nope.. |
+    <%= answer.get_downvotes.size %>
+    <% end %>
+    
+    <% if current_user?(answer.user) ||  current_user.admin? %>
      | <%= link_to "Delete Answer", answer ,method: :delete,
                                        data: { confirm: "You sure?" },class: "btn btn-danger btn-sm" %>
     <% end %> </br>
@@ -51,17 +78,20 @@
 
     <%= form_for Answer.new  do |f| %>
       <%= f.label :answer, 'Add Answer' %>:
-      <%= f.text_field :body, class: 'form-control', :required => true %><br />
+      <%= f.text_field :body,class: 'form-control',:required => true %><br>
+      <span class="picture">
+       <%= f.file_field :picture, accept:'image/jpeg,image/gif,image/png'%>
+      </span>
       <%= f.hidden_field :user_id, :value => current_user.id %>
       <%= f.hidden_field :question_ce_id, :value =>  question_ce.id %>
-      <%= f.submit "Publish Answer"  ,:size => 50 , class: "btn btn-primary"%>
-  <% end %>
+      <%= f.submit "Publish Answer",:size => 50 ,class: "btn btn-primary"%>
+    <% end %>
 
    
     <p></p>
     <p></p>
 
-    <% if current_user?(question_ce.user) ||  current_user.admin? %>
+  <% if current_user?(question_ce.user) ||  current_user.admin? %>
       <%= link_to "Delete Question ", question_ce, method: :delete,
                                        data: { confirm: "You sure?" },class: "btn btn-danger" %>
  	<% end %>

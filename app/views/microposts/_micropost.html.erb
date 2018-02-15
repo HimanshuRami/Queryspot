@@ -10,7 +10,8 @@
     <%= micropost.content %>
     </strong></br>
     
-   <%= image_tag micropost.picture.url if micropost.picture? %>
+   <%= image_tag micropost.picture.url if micropost.picture? %> 
+
    <i>-Posted <%= time_ago_in_words(micropost.created_at) %> ago.</i>
     <%= link_to like_micropost_path(micropost),class: "btn btn-success btn-sm" ,method: :put do %>
    yayy!!! |
@@ -27,7 +28,8 @@
     <% micropost.comments.each do |comment| %>
    <%#=  %> 
    <strong ><%= comment.user.name %> :</strong>
-    <%= comment.body%> |
+    <%= comment.body%>
+     <%= image_tag comment.picture.url if comment.picture? %>  |
     <i>Posted <%= time_ago_in_words(comment.created_at) %> ago.</i> <br>
 
     <%= link_to like_comment_path(comment),class: "btn btn-success btn-sm" ,method: :put do %>
@@ -52,6 +54,9 @@
   <%= form_for Comment.new  do |f| %>
       <%= f.label :comment, 'Add Comment' %>:
       <%= f.text_field :body, class: 'form-control', :required => true %><br />
+      <span class="picture">
+    <%= f.file_field :picture, accept:'image/jpeg,image/gif,image/png'%>
+  </span>
       <%= f.hidden_field :user_id, :value => current_user.id %>
       <%= f.hidden_field :micropost_id, :value =>  micropost.id %>
       <%= f.submit "Publish Comment"  ,:size => 50 , class: "btn btn-primary"%>
