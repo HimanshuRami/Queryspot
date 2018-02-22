@@ -14,11 +14,11 @@
 
    <i>-Posted <%= time_ago_in_words(micropost.created_at) %> ago.</i>
     <%= link_to like_micropost_path(micropost),class: "btn btn-success btn-sm" ,method: :put do %>
-   yayy!!! |
+   <span class="glyphicon glyphicon-thumbs-up"></span>
   <%= micropost.get_upvotes.size %>
   <% end %> | 
     <%= link_to dislike_micropost_path(micropost),class: "btn btn-info btn-sm", method: :put do %>
-  Nope.. |
+  <span class="glyphicon glyphicon-thumbs-down"></span> 
   <%= micropost.get_downvotes.size %>
 
 <% end %>
@@ -33,11 +33,11 @@
     <i>Posted <%= time_ago_in_words(comment.created_at) %> ago.</i> <br>
 
     <%= link_to like_comment_path(comment),class: "btn btn-success btn-sm" ,method: :put do %>
-   yayy!!! |
+   <span class="glyphicon glyphicon-thumbs-up"></span> 
   <%= comment.get_upvotes.size %>
   <% end %> | 
     <%= link_to dislike_comment_path(comment),class: "btn btn-info btn-sm", method: :put do %>
-  Nope.. |
+  <span class="glyphicon glyphicon-thumbs-down"></span> 
   <%= comment.get_downvotes.size %>
 
 <% end %>
@@ -48,7 +48,9 @@
     <% end %> </br>
     <%  end %>
   </span>
-  
+  <p></p>
+  <p></p>
+  <p></p>
   <span class="timestamp">
     
   <%= form_for Comment.new  do |f| %>

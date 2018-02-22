@@ -12,30 +12,21 @@ class User < ApplicationRecord
                     uniqueness: { case_sensitive: false }
   
   has_secure_password
-  
-  def self.find_by_first_letter(letter)
-    find(:all, :conditions => ['title LIKE ?', "#{letter}%"], :order => 'title ASC')
-  end
 
   validates :password, presence: true, length: { minimum: 6 }, allow_nil: true
   
   has_many :microposts, dependent: :destroy
   has_many :comments  , dependent: :destroy 
-  
   has_many :question_ces, dependent: :destroy
   has_many :answers, dependent: :destroy 
-                               
-
   has_many :active_relationships, class_name:  "Relationship",
                                   foreign_key: "follower_id",
                                   dependent:   :destroy
   has_many :passive_relationships, class_name:  "Relationship",
                                    foreign_key: "followed_id",
                                    dependent:   :destroy                    
-  
   has_many :following, through: :active_relationships, source: :followed 
-  has_many :followers, through: :passive_relationships, source: :follower                  
-
+  has_many :followers, through: :passive_relationships, source: :follower 
   has_many :user_subscribed_topics, inverse_of: :user
   has_many :topics, through: :user_subscribed_topics
 
@@ -68,7 +59,7 @@ class User < ApplicationRecord
   end
 
    # Remembers a user in the database for use in persistent sessions.
- def remember
+  def remember
     self.remember_token = User.new_token
     update_attribute(:remember_digest, User.digest(remember_token))
   end

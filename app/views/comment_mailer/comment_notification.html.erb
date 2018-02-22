@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <p><%= @micropost.user.name %> there is a new comment on the post:</p> 
+    <p><h3><%= @micropost.content %></h3></p>
+    <p><strong><%= @comment.user.name %></strong> wrote:</p>
+    <p> "<%= @comment.body %>"</p>
+  </body>
+</html>

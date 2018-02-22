@@ -1,0 +1,3 @@
+<%= @comment.user.username %> commented on your post <%= link_to 'micropost', micropost_url(@comment.micropost) %>
+<%= f.hidden_field :micropost_id, :value =>  params[:micropost_id].to_i %>
+<p>comment: <%= @comment.body %></p>
