@@ -2,7 +2,7 @@
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   
   <span class="user">
-    <%= link_to micropost.user.name, micropost.user %>
+    <%= link_to micropost.user.name, micropost.user %> | <%= micropost.created_at.strftime("%b %d, %Y") %>
   </span>
   
   <span class="content">
@@ -12,7 +12,7 @@
     
    <%= image_tag micropost.picture.url if micropost.picture? %> 
 
-   <i>-Posted <%= time_ago_in_words(micropost.created_at) %> ago.</i>
+   
     <%= link_to like_micropost_path(micropost),class: "btn btn-success btn-sm" ,method: :put do %>
    <span class="glyphicon glyphicon-thumbs-up"></span>
   <%= micropost.get_upvotes.size %>
@@ -23,14 +23,14 @@
 
 <% end %>
     
-    <h4 style="text-align: center;"> Comments: </h4>
-    <p> <%= micropost.comments.count %> Comments till now</p>
+    <h4 style="text-align: center;"> Comments: ( <%= micropost.comments.count %> Comments till now ) </h4>
+    <p> </p>
     <% micropost.comments.each do |comment| %>
    <%#=  %> 
    <strong ><%= comment.user.name %> :</strong>
     <%= comment.body%>
      <%= image_tag comment.picture.url if comment.picture? %>  |
-    <i>Posted <%= time_ago_in_words(comment.created_at) %> ago.</i> <br>
+    <%= comment.created_at.strftime("%b %d, %Y") %><br>
 
     <%= link_to like_comment_path(comment),class: "btn btn-success btn-sm" ,method: :put do %>
    <span class="glyphicon glyphicon-thumbs-up"></span> 
@@ -42,7 +42,7 @@
 
 <% end %>
 
-    <% if current_user?(comment.user) ||  current_user.admin? %>
+    <% if current_user?(comment.user) || current_user.admin? || current_user?(micropost.user)%>
        | <%= link_to "Delete Comment", comment ,method: :delete,
                                        data: { confirm: "You sure?" },class: "btn btn-danger btn-sm" %>
     <% end %> </br>

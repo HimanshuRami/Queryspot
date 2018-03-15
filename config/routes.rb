@@ -38,7 +38,7 @@ Rails.application.routes.draw do
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   
-  resources :question_ces,        only: [:create, :destroy] do
+  resources :question_ces,        only: [:create, :destroy, :index] do
     member do
     put "like", to: "question_ces#upvote"
     put "dislike", to: "question_ces#downvote"

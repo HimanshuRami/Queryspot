@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+  	<h1>QuerySpot</h1>
+    <p><strong><%= @answer.question_ce.user.name %> , </strong> there is a new Answer on Your Quetion:</p> 
+    <p><h3><%= @answer.question_ce.content %></h3></p>
+    <p><strong><%= @answer.user.name %></strong> Answered :</p>
+    <p style="color: red"> "<%= @answer.body %>"</p>
+  </body>
+</html>

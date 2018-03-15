@@ -6,9 +6,14 @@ class AnswersController < ApplicationController
 	
 	def create 
 		@answer = Answer.create(answer_params)
+		if @answer.save
+			AnswerMailer.answer_notification(@answer, @question_ce, @user).deliver_now
 		@answer.user = current_user
-		flash[:success] = "Answer Created"
+		flash[:success] = @answer.user.name + "Thanks For Answering...!!!"
 		redirect_to compdept_path
+		else flash[:danger] = "Error in Creating Answer.!"
+			redirect_to compdept_path
+		end
 	end
 
 	def destroy

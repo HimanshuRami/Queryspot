@@ -4,10 +4,16 @@ class CommentsController < ApplicationController
   	@comment = Comment.new
   end
 
-  def create 
-  	@comment = Comment.create(comment_params)
-  	@comment.user = current_user
-  	redirect_to root_url
+  def create
+  	   @comment = Comment.create(comment_params)
+  	if @comment.save
+       CommentMailer.comment_notification(@comment , @micropost, @user).deliver_now
+       @comment.user = current_user
+       flash[:success] = @comment.user.name + "Thanks For Commenting...!!!"
+  	   redirect_to root_url
+    else flash[:danger] = "Error in Creating Comment.!"
+       redirect_to root_url
+     end 
   end
 
   def destroy

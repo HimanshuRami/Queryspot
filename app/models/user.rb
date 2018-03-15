@@ -52,8 +52,6 @@ class User < ApplicationRecord
                      OR user_id = :user_id", user_id: id)
   end
 
-  
-
   def User.new_token
   	SecureRandom.urlsafe_base64
   end
@@ -117,13 +115,7 @@ class User < ApplicationRecord
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
-  end
-
-  def self.search (search_keyword)
-      where('name LIKE ?', "%#{search_keyword}%")
-  end
-   
-
+  end 
   
   private
   

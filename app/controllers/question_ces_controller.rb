@@ -2,6 +2,9 @@ class QuestionCesController < ApplicationController
  
  before_action :correct_user,   only: :destroy
 
+ 	def index
+ 		@question_ce = QuestionCe.all
+ 	end
 	def create
 #		binding.pry
  	@question_ce = current_user.question_ces.build(question_ce_params)

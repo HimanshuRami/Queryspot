@@ -3,7 +3,8 @@
 </span>
   
     <span class="user">
-  	 <%= link_to question_ce.user.name, question_ce.user %> Added in <%=question_ce.subject.try(:name) %>
+  	 <%= link_to question_ce.user.name, question_ce.user %> Added in <%= link_to question_ce.subject.try(:name) , @question_ce %> | <%= question_ce.created_at.strftime("%b %d, %Y") %>
+
     </span>
 
     <span class="content">
@@ -12,9 +13,6 @@
 
  	  <%= image_tag question_ce.picture.url if question_ce.picture? %><br><br>
 
-    <i>
-   	 -Posted <%= time_ago_in_words(question_ce.created_at) %> ago.
-    </i>
 
     <%= link_to like_question_ce_path(question_ce),class: "btn btn-success btn-sm" ,method: :put do %>
    
@@ -35,12 +33,10 @@
 
 
     <h4 style="text-align: center;"> 
-      Answers: 
+      Answers: ( <%= question_ce.answers.count %> Answers till now )
     </h4>
     
-    <p style="padding-left: 60px">
-      <%= question_ce.answers.count %> Answers till now
-    </p>
+  
     
     <p style="padding-left: 60px">
       
@@ -51,8 +47,7 @@
       </strong>
       
       <%= answer.body%>
-      <%= image_tag answer.picture.url if answer.picture? %> |
-     <i>
+      <%= image_tag answer.picture.url if answer.picture? %> <br>     <i>
       Posted <%= time_ago_in_words(answer.created_at) %> ago.
      </i> <br>
      
@@ -93,7 +88,6 @@
       <%= f.submit "Publish Answer",:size => 50 ,class: "btn btn-primary"%>
     <% end %>
 
-   
     <p></p>
     <p></p>
 

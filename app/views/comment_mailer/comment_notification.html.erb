@@ -4,9 +4,10 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <p><%= @micropost.user.name %> there is a new comment on the post:</p> 
-    <p><h3><%= @micropost.content %></h3></p>
-    <p><strong><%= @comment.user.name %></strong> wrote:</p>
-    <p> "<%= @comment.body %>"</p>
+  	<h1>QuerySpot</h1>
+    <p><strong><%= @comment.micropost.user.name %> , </strong> there is a new comment on Your post:</p> 
+    <p><h3><%= @comment.micropost.content %></h3></p>
+    <p><strong><%= @comment.user.name %></strong> Commented :</p>
+    <p style="color: red"> "<%= @comment.body %>"</p>
   </body>
 </html>
