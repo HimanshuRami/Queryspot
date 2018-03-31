@@ -1,0 +1,21 @@
+<% provide(:title, "EBooks")%>
+<p id="notice"><%= notice %></p>
+
+<%# binding.pry %>
+<% if @descipline.ebooks.present? %>
+	<center><h3>Available Ebook for this Discipline :</h3></center>
+	<hr>
+
+	<table class="table table-bordered table-striped">
+	<ul>
+		<% @descipline.ebooks.each do |ebook|%>
+		<tr><td>
+			
+			<%= link_to ebook.name ,  ebook.attachment_url , target: '_blank'  %>
+			</td></tr>
+		<% end %>
+	</ul>
+</table>
+<% else %>
+	<h3> Sorry, This descipline doesn't have any ebook..</h3>
+<% end %>

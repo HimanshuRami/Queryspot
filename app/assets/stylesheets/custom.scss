@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "w3css";
 /* mixins, ========= variables, ======== etc.*/
 $gray-medium-light: #eaeaea;
 
@@ -129,6 +130,7 @@ p {
 /* ============= footer ================ */
 
 footer {
+
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid #eaeaea;
@@ -343,4 +345,12 @@ span.picture {
   input {
     border: 0;
   }
+}
+
+.w3-green{ 
+    margin-right: 10px;
+    color: #fff!important;
+    background-color: #4CAF50!important;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
 }

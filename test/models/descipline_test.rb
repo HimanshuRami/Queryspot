@@ -1,8 +1,7 @@
 require 'test_helper'
 
-class QuestionCeTest < ActiveSupport::TestCase
+class DesciplineTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
- 
 end

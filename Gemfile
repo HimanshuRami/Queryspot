@@ -10,6 +10,7 @@ gem 'coffee-rails', '4.2.2'
 gem 'faker',        '1.7.3'
 gem 'jquery-rails', '4.3.1'
 gem "letter_opener"
+gem 'rails_admin'
 gem 'carrierwave',  '1.2.2'
 gem 'mini_magick',  '4.7.0'
 gem 'turbolinks',   '5.0.1'

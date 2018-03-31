@@ -59,6 +59,7 @@
       <span class="picture">
     <%= f.file_field :picture, accept:'image/jpeg,image/gif,image/png'%>
   </span>
+  <br>
       <%= f.hidden_field :user_id, :value => current_user.id %>
       <%= f.hidden_field :micropost_id, :value =>  micropost.id %>
       <%= f.submit "Publish Comment"  ,:size => 50 , class: "btn btn-primary"%>

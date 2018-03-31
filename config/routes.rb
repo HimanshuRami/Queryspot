@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+
+
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   get 'password_resets/new'
   get 'password_resets/edit'
   get 'session/new'
@@ -34,7 +37,16 @@ Rails.application.routes.draw do
       # get :subscribe_user
     end
   end
-   
+
+   resources :ebooks, only: [:index, :new, :create, :destroy]
+  #get '/ebooks', to: "ebooks#index"
+  get 'ebooks/index'
+  get 'ebooks/new'
+  get 'ebooks/create'
+  get 'ebooks/destroy'
+  
+  get 'desciplines/book_list', to: 'desciplines#book_list'
+  resources :desciplines
   resources :account_activations, only: [:edit]
   resources :password_resets,     only: [:new, :create, :edit, :update]
   
@@ -44,7 +56,7 @@ Rails.application.routes.draw do
     put "dislike", to: "question_ces#downvote"
   end
 end
-  resources :microposts,          only: [:create, :destroy] do
+  resources :microposts,          only: [:create, :destroy, :index] do
     member do
     put "like", to: "microposts#upvote"
     put "dislike", to: "microposts#downvote"

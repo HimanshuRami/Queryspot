@@ -1,0 +1,53 @@
+<% provide(:title, "EBooks")%>
+
+<h1>Book Box</h1>
+
+<!DOCTYPE html>
+<html>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css"> -->
+  
+  <body>
+  
+  <div class="w3-container">
+    <h2>Books Of your Choices</h2>
+      <div class="container-fluid bg-3 text-center"><br></div>
+      
+      <% @desciplines.each do |des| %>
+        <div class="w3-dropdown-hover">
+           <button class="w3-button w3-green" id= <%= des.id%>> <%= des.name %></button>
+        </div>
+      <% end %>
+
+    <div id= "content">
+      <!-- Ebook of for example Engineering will be listed here -->
+    </div>
+
+    <% if current_user.admin? %>
+       <button class="btn btn-primary add_new_ebook">Add new Ebook</button>
+      <div class="new_ebook_form">
+        <%= render partial: 'ebooks/new_ebook', locals: {ebook: Ebook.new} %>
+      </div>
+  <%end%>
+
+  </div>
+  </body>
+</html>
+
+<script type="text/javascript">
+  $('.new_ebook_form').hide();
+  $('.add_new_ebook').click(function(){
+    $('.new_ebook_form').toggle();
+  })
+  $(".w3-button").click(function() {
+      var id = $(this).attr('id');
+      $.ajax({
+      type: "GET",
+      url: "/desciplines/book_list",
+      data: { id:  id  },
+      success: function(data){
+        $('#content').html(data)
+      } 
+    })
+  });
+</script>

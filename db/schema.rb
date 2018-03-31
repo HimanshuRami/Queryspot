@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180215094317) do
+ActiveRecord::Schema.define(version: 20180328124646) do
 
   create_table "answers", force: :cascade do |t|
     t.text "body"
@@ -23,6 +23,12 @@ ActiveRecord::Schema.define(version: 20180215094317) do
     t.index ["user_id"], name: "index_answers_on_user_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "body"
     t.integer "micropost_id"
@@ -32,6 +38,21 @@ ActiveRecord::Schema.define(version: 20180215094317) do
     t.string "picture"
     t.index ["micropost_id"], name: "index_comments_on_micropost_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "desciplines", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "ebooks", force: :cascade do |t|
+    t.string "name"
+    t.string "attachment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "descipline_id"
+    t.index ["descipline_id"], name: "index_ebooks_on_descipline_id"
   end
 
   create_table "microposts", force: :cascade do |t|
